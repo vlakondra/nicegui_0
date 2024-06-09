@@ -23,7 +23,7 @@ def update(*, df: pd.DataFrame, r: int, c: int, value):
     ui.notify(f'Set ({r}, {c}) to {value}')
 
 
-ui.button('Logo', on_click=lambda: ui.download('f.xlsx'))
+ui.button('Загрузить файл Excel', on_click=lambda: ui.download('f.xlsx'))
 
 with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
     for c, col in enumerate(df.columns):
