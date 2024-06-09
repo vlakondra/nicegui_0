@@ -19,8 +19,11 @@ print(df)
 def update(*, df: pd.DataFrame, r: int, c: int, value):
     df.iat[r, c] = value
     df.to_excel('f.xlsx')
+    print("DF",df)
     ui.notify(f'Set ({r}, {c}) to {value}')
 
+
+ui.button('Logo', on_click=lambda: ui.download('f.xlsx'))
 
 with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
     for c, col in enumerate(df.columns):
