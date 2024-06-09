@@ -14,7 +14,7 @@ df = pd.DataFrame(data={
 })
 
 print(df)
-df.to_excel('f.xlsx')
+# df.to_excel('f.xlsx')
 
 def update(*, df: pd.DataFrame, r: int, c: int, value):
     df.iat[r, c] = value
