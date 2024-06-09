@@ -18,6 +18,7 @@ print(df)
 
 def update(*, df: pd.DataFrame, r: int, c: int, value):
     df.iat[r, c] = value
+    df.to_excel('f.xlsx')
     ui.notify(f'Set ({r}, {c}) to {value}')
 
 
