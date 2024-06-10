@@ -23,7 +23,7 @@ print(df)
 
 def update(*, df: pd.DataFrame, r: int, c: int, value):
     df.iat[r, c] = value
-    df.iat[r,3]=round(df.iat[r,1] / df.iat[r,2]**2*703,1)
+    df.iat[r,3]=round(df.iat[r,2] / df.iat[r,1]**2*703,1)
     df.to_excel('f.xlsx')
     print("DF",df)
     ui.notify(f'Set ({r}, {c}) to {value}')
@@ -53,10 +53,12 @@ with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
         ui.label(col).classes('font-bold')
         for r, row in enumerate(df.loc[:, col]):
             if c==0 :
-                ui.html(f'{df.iloc[r,c]}',tag='div')
+                h = ui.html(f'{df.iloc[r,c]}',tag='div')
+                
                 # print('?',df.iloc[r,c])
             elif c==3:
-                ui.html(f'{df.iloc[r,c]}',tag='div')
+                bmi =ui.html(f'{df.iloc[r,c]}',tag='div')
+                print('ID',bmi.id)
             elif c > 0 and c < 3:
                 cls = ui.number
                 cls(value=row,on_change=lambda event, r=r, c=c: update(df=df, r=r, c=c, value=event.value))
