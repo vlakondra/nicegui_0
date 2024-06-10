@@ -39,4 +39,4 @@ with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
                 cls = ui.input
             cls(value=row, on_change=lambda event, r=r, c=c: update(df=df, r=r, c=c, value=event.value))
 
-ui.run(uvicorn_logging_level='info')
+ui.run(uvicorn_logging_level='debug')
