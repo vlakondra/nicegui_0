@@ -23,15 +23,18 @@ print(df)
 
 def update(*, df: pd.DataFrame, r: int, c: int, value):
     df.iat[r, c] = value
-    df.iat[r,3]=round(df.iat[r,2] / df.iat[r,1]**2*703,1)
+    newbmi = round(df.iat[r,2] / df.iat[r,1]**2*703,1)
+    df.iat[r,3]=newbmi
+    bmi_dict[r].content=str(newbmi)
     df.to_excel('f.xlsx')
     print("DF",df)
-    ui.notify(f'Set ({r}, {c}) to {value}')
+    # ui.notify(f'Set ({r}, {c}) to {value}')
 
 
 ui.button('Загрузить файл Excel', on_click=lambda: ui.download('f.xlsx'))
+ui.html('qwerty').content='123'
 
-ui.html('This is <u>emphasized</u>.', tag='em')
+bmi_dict={}
 
 # with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
 #     for c, col in enumerate(df.columns):
@@ -53,20 +56,16 @@ with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
         ui.label(col).classes('font-bold')
         for r, row in enumerate(df.loc[:, col]):
             if c==0 :
-                h = ui.html(f'{df.iloc[r,c]}',tag='div')
-                
-                # print('?',df.iloc[r,c])
+                ui.html(f'{df.iloc[r,c]}',tag='div')
             elif c==3:
                 bmi =ui.html(f'{df.iloc[r,c]}',tag='div')
-                print('ID',bmi.id)
-            elif c > 0 and c < 3:
+                bmi_dict[r]=bmi
+            elif c == 1 or c == 2:
                 cls = ui.number
                 cls(value=row,on_change=lambda event, r=r, c=c: update(df=df, r=r, c=c, value=event.value))
-            # else:
-            #     print(555)
-            #     cls = ui.input
+      
+        
 
-            #cls(value=row)
 
 
 
