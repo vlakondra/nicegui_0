@@ -62,10 +62,10 @@ with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-1 mt-1 items-center
         for r, row in enumerate(df.loc[:, col]):
             if c == 0 :
                 ui.html(f'{df.iloc[r,c]}',tag='div') #индексы
-            elif c == 3:
-                bmi = ui.html(f'{df.iloc[r,c]}',tag='h6').classes('font-semibold text-blue-600 ') #HTML-объект BMI
+            elif c == 3: #BMI
+                bmi = ui.html(f'{df.iloc[r,c]}').classes('font-semibold text-blue-600 ') #HTML-объект BMI
                 bmi_dict[r] = bmi #сохраняем в словаре с ключем текущей строки
-            elif c == 1 or c == 2: #рост и вес
+            elif c in (1, 2): #рост и вес
                 cls = ui.number
                 cls(value=row,on_change=lambda event, r=r, c=c: update(df=df, r=r, c=c, value=event.value))
 
