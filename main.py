@@ -34,6 +34,10 @@ def update(*, df: pd.DataFrame, r: int, c: int, value):
 
 
 ui.button('Загрузить файл Excel', on_click=lambda: ui.download('f.xlsx'))
+sb=df.BMI
+print(df.iloc[[0],[3]]['BMI'][0])
+
+
 
 bmi_dict={} #словарь HTML-объектов BMI
 
@@ -52,14 +56,14 @@ bmi_dict={} #словарь HTML-объектов BMI
 #             cls(value=row, on_change=lambda event, r=r, c=c: update(df=df, r=r, c=c, value=event.value))
 
 
-with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-8 mt-8'):
+with ui.grid(rows=len(df.index)+1).classes('grid-flow-col mx-1 mt-1 items-center'):
     for c, col in enumerate(df.columns):
         ui.label(col).classes('font-bold')
         for r, row in enumerate(df.loc[:, col]):
-            if c==0 :
+            if c == 0 :
                 ui.html(f'{df.iloc[r,c]}',tag='div') #индексы
-            elif c==3:
-                bmi = ui.html(f'{df.iloc[r,c]}',tag='h6').classes('font-semibold text-blue-600') #HTML-объект BMI
+            elif c == 3:
+                bmi = ui.html(f'{df.iloc[r,c]}',tag='h6').classes('font-semibold text-blue-600 ') #HTML-объект BMI
                 bmi_dict[r] = bmi #сохраняем в словаре с ключем текущей строки
             elif c == 1 or c == 2: #рост и вес
                 cls = ui.number
