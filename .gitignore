@@ -32,7 +32,7 @@ MANIFEST
 *.manifest
 *.spec
 
-ursei.db
+# ursei.db
 
 # Installer logs
 pip-log.txt

@@ -7,7 +7,8 @@ def StudentsByGroup(grp_id):
     а также при запуске приложения'''
 
     std = (Student
-       .select(Student.fam.alias('Фамилия'),
+       .select(Student.id,
+               Student.fam.alias('Фамилия'),
                Student.studname.alias('Имя'),
                Student.age.alias('Возраст'),
                Student.studgroup)
@@ -50,7 +51,9 @@ with ui.card().style("margin:auto"):
                 ))
 
     #Выводим таблицу со студентами
-    stdTable = ui.table( rows=StudentsByGroup(list(gd.keys())[5]), row_key="id",
+    #содержание таблицы зависит от выбранной группы
+    stdTable = ui.table( rows=StudentsByGroup(list(gd.keys())[5]),
+                    row_key="id",
                     title="Студенты",
                     pagination=3,
                     selection='single')  
